@@ -16,7 +16,8 @@ def main():
     gameboard = Gameboard()
     players = get_players()
     current_player = 'X'
-    while True:
+    continue_playing="yes"
+    while continue_playing.lower() == "yes":
         gameboard.display_board()
         if players == 1 and current_player == 'O':
             message = gameboard.computer_move(current_player)
@@ -35,7 +36,10 @@ def main():
             print(status[winner])
             gameboard.update_scoreboard(winner)
             print(f"Scoreboard: {gameboard.scoreboard}")
-            break
+            continue_playing = input("Do you want to play again? (yes/no): ")
+        
+            gameboard.reset_board()  # Reset the board for a new game
+            
         current_player = 'O' if current_player == 'X' else 'X'
 
 if __name__ == "__main__":

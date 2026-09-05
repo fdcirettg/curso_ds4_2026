@@ -46,6 +46,9 @@ class Gameboard:
         # This method can be implemented to update a scoreboard if needed.
         if player is not None:
             self.scoreboard[player] += 1
+    def reset_board(self):
+        """Reset the game board for a new game."""
+        self.board = {x:str(x) for x in range(1, 10)}
 
 if __name__ == "__main__":
     gameboard = Gameboard()
