@@ -1,0 +1,13 @@
+python
+hangman
+challenge
+programming
+function
+variable
+loop
+condition
+class
+object
+dynamic
+memory
+handling
