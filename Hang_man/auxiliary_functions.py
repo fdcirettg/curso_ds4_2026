@@ -29,6 +29,16 @@ def reduce_list_of_words(word_list:list, min_length:int=3) -> list:
     reduced_words = list(word_set)
     return reduced_words
 
+def count_words(word_list:list) -> dict:
+    """Count the occurrences of each word in a list and return a dictionary."""
+    word_count = {}
+    for word in word_list:
+        if word in word_count:
+            word_count[word] += 1
+        else:
+            word_count[word] = 1
+    return word_count
+
 if __name__ == "__main__":
     # Example usage
     book_path = "Dracula.txt"
@@ -42,5 +52,11 @@ if __name__ == "__main__":
     reduced_words = reduce_list_of_words(cleaned_words,4)
     
     print(reduced_words)
+    word_dict = count_words(cleaned_words)
+    # Print the top ten most common words
+    top_ten_words = sorted(word_dict.items(), key=lambda x: x[1], reverse=True)[:10]
+    print("Top ten most common words:")
+    for word, count in top_ten_words:
+        print(f"{word}: {count}")
     print("Number of words in the reduced list:", len(reduced_words))
     save_words_to_file(reduced_words, "dracula_words.txt")
