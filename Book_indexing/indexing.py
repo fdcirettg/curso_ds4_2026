@@ -91,13 +91,28 @@ def main(args):
                 book_dictionary[file] = load_book(os.path.join(book_path, file))
     else:
         print(f"Error: The path '{book_path}' is neither a file nor a directory.")
-    print(book_dictionary.keys())
+    #print(book_dictionary.keys())
+    word_to_check = args.word_to_check
+    result_list = search_word(book_dictionary, word_to_check)
+    for book, tfidf in result_list:
+        print(f"Book: {book}, TF-IDF for '{word_to_check}': {tfidf:.6f}")
+
+def search_word(book_dictionary: dict, word: str)->list:
+    """ Search for a word in the book dictionary and return a list of books containing the word """
     tfidf_dict = book_indexing(book_dictionary)
     print("TF-IDF Dictionary:", tfidf_dict.keys())
-    D = tfidf_dict["Dracula.txt"]
-    print("TF-IDF for 'Dracula.txt':")
+    print(f"TF-IDF for '{word}':")
+    result_dict = {}
+    for book_name, tfidf in tfidf_dict.items():
+        if word in tfidf:
+            result_dict[book_name] = tfidf[word]
+    sorted_results = sorted(result_dict.items(), key=lambda x: x[1], reverse=True)
+    return sorted_results
+            #print(f"Book: {book_name}, TF-IDF for '{word_to_check}': {tfidf[word_to_check]:.6f}")
+    """
     if "dracula" in D:
         print(f"TF-IDF for 'dracula': {D['dracula']}")
+    """
     """
     for book_name, words in book_dictionary.items():
         cleaned_words = clean_list_of_words(words)
@@ -115,6 +130,7 @@ def main(args):
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description="Index books.")
-    parser.add_argument("book_path", type=str, help="Path to the books text files.")
+    parser.add_argument("book_path", type=str, help="Path to the books text files.", default="texts")
+    parser.add_argument("word_to_check", type=str, help="Word to check TF-IDF for.", default="dracula")
     args = parser.parse_args()
     main(args)
