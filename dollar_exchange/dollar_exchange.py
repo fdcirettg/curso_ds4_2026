@@ -6,6 +6,19 @@ import requests
 import argparse
 from bs4 import BeautifulSoup
 
+def read_file(file_path:str) -> str:
+    """Read the content of a file and return it as a string."""
+    if not os.path.exists(file_path):
+        raise FileNotFoundError(f"The file {file_path} does not exist.")
+    with open(file_path, 'r', encoding='utf-8') as f:
+        return f.read()
+
+def write_file(file_path:str, content:str):
+    """Write the content to a file."""
+    with open(file_path, 'w', encoding='utf-8') as f:
+        f.write(content)
+        print(f"Content saved to {file_path}")
+
 def scrap_web_page(url:str) -> str:
     """Scrap the content of a web page and return the text."""
     response = requests.get(url, timeout=10)
@@ -43,10 +56,15 @@ def main(args):
     url = args.url
     output_file = args.output_file
     try:
-        content = scrap_web_page(url)
-        with open(output_file, 'w', encoding='utf-8') as f:
-            f.write(content)
-        print(f"Web page content saved to {output_file}")
+        #is url an url or a file path?
+        if os.path.exists(url):
+            content = read_file(url)
+        else:
+            content = scrap_web_page(url)
+            write_file(output_file, content)
+        #with open(output_file, 'w', encoding='utf-8') as f:
+        #    f.write(content)
+        #print(f"Web page content saved to {output_file}")
         price_list = get_dollar_exchange_rate(content)
         if price_list:
             print("Dollar Exchange Rates:")
@@ -58,6 +76,7 @@ def main(args):
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description="Scrap a web page and save its content to a file.")
     parser.add_argument("url", type=str, help="The URL of the web page to scrap.")
-    parser.add_argument("output_file", type=str, help="The output file to save the content.")
+    # make output_file optional, if not provided, use 'output.html' as default
+    parser.add_argument("output_file", type=str, nargs='?', default='output.html', help="The output file to save the content. Default is 'output.html'.")
     args = parser.parse_args()
     main(args)
