@@ -1,0 +1,26 @@
+id,created_at,movie_title,release_date,poster_url,username
+1,2026-10-22 16:23:00,Star Wars,1977-05-04,https://m.media-amazon.com/images/M/MV5BOGUwMDk0Y2MtNjBlNi00NmRiLTk2MWYtMGMyMDlhYmI4ZDBjXkEyXkFqcGc@._V1_.jpg,fcirettg
+2,2026-10-23 16:23:00,The Empire strikes back,1980-05-21,https://m.media-amazon.com/images/M/MV5BZWQyNTJkMTAtZWQ0Zi00NGFlLWI2ZDktNTA4MzM5NDQ0MTk4XkEyXkFqcGc@.jpg,fcirettg
+3,2026-10-24 16:23:00,Cars,2006-06-09,https://www.imdb.com/es/title/tt0317219/mediaviewer/rm3794114560/?ref_=tt_ov_i,Zero
+4,2026-10-25 16:23:00,proyect hail mary,2026-03-20,https://m.media-amazon.com/images/M/MV5BOWU1YTI0MzUtZGQ2OC00N2M0LTlhZmUtZTgzNGEyYTFkZDM2XkEyXkFqcGc@._V1_.jpg,senna
+5,2026-10-26 16:23:00,"Blood in Blood Out",1993-04-30,https://www.imdb.com/title/tt0106469/mediaviewer/rm1606944768/?ref_=tt_ov_i,paulitorico
+6,2026-10-27 16:23:00,Whiplash,2014-01-14,https://m.media-amazon.com/images/M/MV5BMjM0NmUzOWUtN2I0Mi00NTRiLWJmNzItZDE2YWIwNDIwNmEzXkEyXkFqcGc@.jpg,naruto
+7,2026-10-28 16:23:00,El Camino,2019-10-11,https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTImJOmoT5Ai3bgZzlghhWpD2uFvQNnDSe0Lvd7ltFbMRrWWH5y1cmXhs0&s=10,ale
+8,2026-10-29 16:23:00,Scooby doo,2002-06-14,https://m.media-amazon.com/images/M/MV5BMTg4MzMzMTY0OF5BMl5BanBnXkFtZTYwNzM3MTg2._V1_.jpg,senna
+9,2026-10-30 16:23:00,The Lord of the Rings,1905-06-23,https://www.imdb.com/es/title/tt0120737/mediaviewer/rm3578885120/?ref_=tt_ov_i,puppet
+10,2026-10-31 16:23:00,Alice in Wonderland,2010-05-24,https://www.imdb.com/es/title/tt1014759/mediaviewer/rm1985180928/?ref_=tt_ov_i,Zero
+11,2026-11-01 16:23:00,Dune 2 ,2024-02-29,https://www.imdb.com/es/title/tt15239678/mediaviewer/rm2677360129/?ref_=tt_ov_i,goku
+12,2026-11-02 16:23:00,Barbie: Fairytopia,2005-03-08,https://www.imdb.com/title/tt0450982/mediaviewer/rm2347736321/?ref_=tt_ov_i,paulitorico
+13,2026-11-03 16:23:00,Viernes 13,1905-06-02,https://th.bing.com/th/id/OIP._7BDyPlDbk61TxeC8onzOgHaLH?w=202&h=303&c=7&r=0&o=7&dpr=1.5&pid=1.7&rm=3,Raphinha
+14,2026-11-04 16:23:00,El Rey Leon,1905-06-16,https://www.imdb.com/es/title/tt0110357/mediaviewer/rm1058567936/?ref_=tt_ov_i,Everybody
+15,2026-11-05 16:23:00,Kung Fu Panda,1905-06-30,https://m.media-amazon.com/images/M/MV5BNmVhZjdkMzQtMDc4ZS00ODg1LTgxM2UtMjlkNDIxNjU1NzNmXkEyXkFqcGc@.jpg,miguelito
+16,2026-11-06 16:23:00,Django Unchained,2012-12-25,https://www.imdb.com/title/tt1853728/mediaviewer/rm958180352/?ref_=tt_ov_i,joni
+17,2026-11-07 16:23:00,The Dark Knight,2008-07-18,https://www.imdb.com/title/tt0468569/mediaviewer/rm4023877632/?ref_=tt_ov_i,joni
+18,2026-11-08 16:23:00, The Texas Chain Saw Massacre,1974-10-01,https://www.imdb.com/es/title/tt0072271/mediaviewer/rm3167913473/?ref_=tt_ov_i,mariana:p
+19,2026-11-09 16:23:00,Winnie the Pooh,1905-07-03,https://www.imdb.com/es/title/tt1449283/mediaviewer/rm4175218690/?ref_=tt_ov_i,Zero
+20,2026-11-10 16:23:00,Dune 3,2026-12-17,https://i.blogs.es/b3ed99/1366_2000/650_1200.jpeg,Zero
+21,2026-11-11 16:23:00,Intocable,2011-11-02,https://m.media-amazon.com/images/M/MV5BOWFmYzhiODMtZjYzOC00MTgyLWFkN2MtM2VlMDgwMzdkNGNkXkEyXkFqcGc@.jpg,naruto
+22,2026-11-12 16:23:00,No disponible,2026-10-30,,naruto
+23,2026-11-13 16:23:00,Blade Runner 2049,2017-10-06,https://www.google.com/url?sa=t&source=web&rct=j&url=https%3A%2F%2Fwww.bbc.com%2Fculture%2Farticle%2F20171004-film-review-does-blade-runner-2049-top-the-original&ved=0CBcQjRxqFwoTCICJ892zzJcDFQAAAAAdAAAAABA3&opi=89978449,senna
+24,2026-11-14 16:23:00,Misión: imposible 5 - Nación secreta,2025-07-04,https://m.media-amazon.com/images/M/MV5BMmVkNTZlYzMtYmE3NS00OTRjLTk0YzUtOTFjYzFkZGQxZTEyXkEyXkFqcGc@.jpg,senna
+25,2026-11-15 16:23:00,Dune,2022-10-22,https://thumb.wikimedia.org/wikipedia/en/thumb/8/8e/Dune_%282021_film%29.jpg/250px-Dune_%282021_film%29.jpg?utm_source=en.wikipedia.org&utm_campaign=parser&utm_content=thumbnail,mariana:p
