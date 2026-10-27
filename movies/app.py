@@ -9,8 +9,9 @@ app = Flask(__name__)
 def index():
     db_path = 'movies.db'
     conn = db.open_database(db_path)
-    query = "SELECT * FROM movies;"
+    query = "SELECT * FROM movies ORDER BY release_date DESC;"
     rows = db.retrieve_data_with_query(conn, query)
+    db.close_database(conn)
     return render_template('index.html', rows=rows)
 
 if __name__ == '__main__':
