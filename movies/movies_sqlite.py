@@ -171,12 +171,12 @@ def main():
     print("Connections Data:")
     show_rows(connections_rows)
 
-    stars_rows = retrieve_data_with_query(conn, "SELECT real_name, date_of_birth FROM stars WHERE stage_name = 'Carrie Fisher';")
-    print("Carrie Fisher Data:")
+    stars_rows = retrieve_data_with_query(conn, "SELECT real_name, date_of_birth FROM stars WHERE stage_name LIKE '%chis%';")
+    print("Star Data:")
     show_rows(stars_rows)
 
-    movies_rows = retrieve_data_with_query(conn, "SELECT movie_title, release_date FROM movies WHERE movie_title LIKE '%alice%';")
-    print("Movies with 'alice' in the title:")
+    movies_rows = retrieve_data_with_query(conn, "SELECT movie_title, release_date FROM movies WHERE movie_title LIKE '%dune%';")
+    print("Movies with 'dune' in the title:")
     show_rows(movies_rows)
     close_database(conn)
 

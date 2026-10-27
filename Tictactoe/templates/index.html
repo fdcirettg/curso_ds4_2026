@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tic Tac Toe</title>
+    
+    <link rel= "stylesheet" type= "text/css" href= "{{ url_for('static',filename='css/tictactoe.css') }}">
+</head>
+<body>
+    <h1>Welcome to Tic Tac Toe</h1>
+    <p>This is a simple Tic Tac Toe game built with Flask.</p>
+    <p>Enjoy the game!</p>
+    <div>
+        <p class="player">Current player: <span id="current-player">{{ player }}</span></p>
+        <p class="message">{{ message }}</p>
+        <div class="board">
+            <table>
+                {% for row in [[1,2,3],[4,5,6],[7,8,9]] %}
+                <tr>
+                    {% for n in row %}
+                    <td>
+                        {% if board[n] in ['X', 'O'] %}{{ board[n] }}
+                        {% elif winner %}{{ n }}
+                        {% else %}<a href="{{ url_for('move', position=n) }}">{{ n }}</a>
+                        {% endif %}
+                    </td>
+                    {% endfor %}
+                </tr>
+                {% endfor %}
+            </table>
+            {% if line %}
+            <svg class="win-line" width="300" height="300">
+                <line x1="{{ line[0] }}" y1="{{ line[1] }}" x2="{{ line[2] }}" y2="{{ line[3] }}"
+                      stroke="red" stroke-width="6" stroke-linecap="round"/>
+            </svg>
+            {% endif %}
+        </div>
+        <p><a href="{{ url_for('reset') }}">New game</a></p>
+    </div>
+</body>
+</html>
