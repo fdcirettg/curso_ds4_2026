@@ -1,13 +1,20 @@
 <!DOCTYPE html>
+<html lang="en">
 <head>
+    <meta charset="UTF-8">
     <title>My Movie Database</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/movie_styles.css') }}">
 </head>
 <body>
     <h1>My Movie Database</h1>
     <ul>
         {% for movie in rows %}
-            <li>{{ movie.movie_title }} ({{ movie.release_date }})</li>
+            <li>
+
+                <span>{{ movie.movie_title }} ({{ movie.release_date }})</span>
+            </li>
         {% endfor %}    
     </ul>
 </body>
+</html>
 </html>
