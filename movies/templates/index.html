@@ -7,10 +7,15 @@
 </head>
 <body>
     <h1>My Movie Database</h1>
+    <div><a href="{{ url_for('movies') }}">View Movies</a></div>
     <ul>
         {% for movie in rows %}
             <li>
-
+                {% if movie.poster_url %}
+                <a href="{{ url_for('movie_detail', movie_id=movie.id) }}">
+                    <img src="{{ movie.poster_url }}" alt="{{ movie.movie_title }} poster" width="100">
+                </a>
+                {% endif %}
                 <span>{{ movie.movie_title }} ({{ movie.release_date }})</span>
             </li>
         {% endfor %}    

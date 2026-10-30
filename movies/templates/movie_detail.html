@@ -1,0 +1,45 @@
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>Movie Detail</title>
+        <link rel="stylesheet" href="{{ url_for('static', filename='css/movie_styles.css') }}">
+    </head>
+    <body>
+        <h1>Movie Detail</h1>
+        <p>Welcome to the Movie Detail page!</p>
+        <table>
+            <tr>
+                <th>Poster</th>
+                <th>Details</th>
+            </tr>
+            
+            <tr>
+                {% for movie in rows %}
+                <td>
+                    
+                    {% if movie.poster_url %}
+                        <img src="{{ movie.poster_url }}" alt="{{ movie.movie_title }} poster" width="250">
+                    {% else %}
+                        No poster available
+                    {% endif %}
+                    
+                </td>
+                <td>
+                    <h2>{{ movie.movie_title }}</h2>
+                    <h3> ({{ movie.release_date }})</h3>
+                    <p><strong>Release Date:</strong> {{ movie.release_date }}</p>
+                    <p><strong>Stars:</strong></p>
+                    <ul>
+                        {% for star in stars %}
+                            
+                                <li>{{ star.role }} - {{ star.stage_name }}</li>
+                            
+                        {% endfor %}
+                    </ul>
+                </td>
+                {% endfor %}
+            </tr>
+        </table>
+        <div><a href="{{ url_for('movies') }}">Back to Movies</a></div>
+    </body>
+</html>

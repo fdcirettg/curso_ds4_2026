@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>My Movie Database - Movies</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/movie_styles.css') }}">
+</head>
+<body>
+    <h1>My Movie Database</h1>
+    <h2>Movies</h2>
+    <p>Welcome to the Movie Database!</p>
+    <ul>
+        {% for movie in rows %}
+            <li>
+                {% if movie.poster_url %}
+                <a href="{{ url_for('movie_detail', movie_id=movie.id) }}">
+                    <img src="{{ movie.poster_url }}" alt="{{ movie.movie_title }} poster" width="100">
+                </a>
+                {% endif %}
+                <span>{{ movie.movie_title }} ({{ movie.release_date }})</span>
+            </li>
+        {% endfor %}    
+    </ul>
+</body>
+</html>
+</html>
