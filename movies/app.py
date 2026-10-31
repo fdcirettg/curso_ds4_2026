@@ -35,9 +35,13 @@ def movie_detail(movie_id):
     # Stars query to get the stars associated with the movie
     query_stars = f"SELECT stars.*, connections.role FROM stars,movies,connections WHERE connections.movie_id = {movie_id} AND connections.star_id = stars.id AND connections.movie_id = movies.id;"
     stars = db.retrieve_data_with_query(conn, query_stars)
-    print(f"Retrieved rows: {stars}")  # Debugging line
+    #print(f"Retrieved rows: {stars}")  # Debugging line
     db.close_database(conn)
     return render_template('movie_detail.html', rows=rows, stars=stars)
+
+""" TODO: Add a route to display the list of stars and their details. 
+    We hace to create a new template stars.html and star_detail.html to display the list of stars and their details.
+    The route should be /stars and /star_detail/<int:star_id> respectively."""
 
 if __name__ == '__main__':
     app.run(debug=True) 
