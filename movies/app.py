@@ -42,6 +42,32 @@ def movie_detail(movie_id):
 """ TODO: Add a route to display the list of stars and their details. 
     We hace to create a new template stars.html and star_detail.html to display the list of stars and their details.
     The route should be /stars and /star_detail/<int:star_id> respectively."""
+    
+@app.route('/stars')
+def stars():
+    """ Route to display the list of stars """
+    db_path = 'movies.db'
+    conn = db.open_database(db_path)
+    query = "SELECT * FROM stars ORDER BY stage_name DESC;"
+    rows = db.retrieve_data_with_query(conn, query)
+    db.close_database(conn)
+    return render_template('stars.html', rows=rows)
+
+@app.route('/star_detail/<int:star_id>')
+def star_detail(star_id):
+    """ Route to display the details of a star """
+    db_path = 'movies.db'
+    conn = db.open_database(db_path)
+    # Query to get the star details
+    query = f"SELECT * FROM stars WHERE stars.id = {star_id};"
+    rows = db.retrieve_data_with_query(conn, query)
+
+    # Movies query to get the movies associated with the star
+    query_movies = f"SELECT movies.*, connections.role FROM stars,movies,connections WHERE connections.star_id = {star_id} AND connections.movie_id = movies.id AND connections.star_id = stars.id;"
+    related_movies = db.retrieve_data_with_query(conn, query_movies)
+    db.close_database(conn)
+    #print(related_movies)  # Debugging line
+    return render_template('star_detail.html', rows=rows, movies=related_movies)
 
 if __name__ == '__main__':
     app.run(debug=True) 
