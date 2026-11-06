@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+{% block body %}
+    <h1>7th Art Database</h1>
+    <h2>Stars</h2>
+    <p>Welcome to the Movie Database!</p>}
+    <ul>
+        {% for star in rows %}
+            <li>
+                {% if star.image_url %}
+                <a href="{{ url_for('star_detail', star_id=star.id) }}">
+                    <img src="{{ star.image_url }}" alt="{{ star.stage_name }} image" width="100">
+                </a>
+                {% endif %}
+                <span>{{ star.stage_name }} ({{ star.real_name }})</span>
+            </li>
+        {% endfor %}    
+    </ul>
+{% endblock %}

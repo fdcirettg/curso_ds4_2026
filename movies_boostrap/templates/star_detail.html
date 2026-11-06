@@ -1,0 +1,43 @@
+{% extends "base.html" %}
+{% block body %}
+        <h1>Star Detail</h1>
+        <p>Welcome to the Star Detail page!</p>
+        <table>
+            <tr>
+                <th>Photo</th>
+                <th>Details</th>
+            </tr>
+            
+            <tr>
+                {% for star in rows %}
+                <td>
+                    
+                    {% if star.image_url %}
+                        <img src="{{ star.image_url }}" alt="{{ star.stage_name }} image" width="250">
+                    {% else %}
+                        No poster available
+                    {% endif %}
+                    
+                </td>
+                <td>
+                    <h2>{{ star.stage_name }}</h2>
+                    <h3> ({{ star.real_name }})</h3>
+                    <p><strong>Birth Date:</strong> {{ star.date_of_birth }}</p>
+                    <p><strong>Birth Place:</strong> {{ star.place_of_birth }}</p>
+                    <p><strong>Stars in:</strong></p>
+                    <ul>
+                        {% for movie in movies %}
+                            
+                                <li>
+                                    <a href="{{ url_for('movie_detail', movie_id=movie.id) }}">
+                                        {{ movie.movie_title }}
+                                    </a> - {{ movie.role }}
+                                </li>
+                            
+                        {% endfor %}
+                    </ul>
+                </td>
+                {% endfor %}
+            </tr>
+        </table>
+{% endblock %}

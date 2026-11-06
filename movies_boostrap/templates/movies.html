@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+{% block body %}
+    <h1>7th Art Database</h1>
+    <h2>Movies</h2>
+    <p>Welcome to the Movie Database!</p>
+    <div><a href="{{ url_for('index') }}">Back to Home</a></div>
+    <ul>
+        {% for movie in rows %}
+            <li>
+                {% if movie.poster_url %}
+                <a href="{{ url_for('movie_detail', movie_id=movie.id) }}">
+                    <img src="{{ movie.poster_url }}" alt="{{ movie.movie_title }} poster" width="100">
+                </a>
+                {% endif %}
+                <span>{{ movie.movie_title }} ({{ movie.release_date }})</span>
+            </li>
+        {% endfor %}    
+    </ul>
+{% endblock %}

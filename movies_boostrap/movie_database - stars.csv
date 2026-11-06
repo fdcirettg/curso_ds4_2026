@@ -1,0 +1,30 @@
+id,created_at,stage_name,real_name,date_of_birth,place_of_birth,image_url,username
+1,2026-10-28 17:11:00,Mark Hamill,Mark Richard Hamill,1951-09-25,"Oakland, California",https://decine21.com/img/upload/perfiles/mark-hamill-14817/mark-hamill-14817-c.jpg,fcirettg
+2,2026-10-29 17:11:00,Carrie Fisher,Carrie Frances Fisher,1956-10-21,"Burbank, California",https://m.media-amazon.com/images/M/MV5BMTY3YWY0YjAtY2Y5OS00OTQxLWE4NGQtZDA3NDU0YTVlZDMxXkEyXkFqcGc@._V1_.jpg,fcirettg
+3,2026-10-30 17:11:00,Harrison Ford,Harrison Ford,1942-07-13,"Chicago, Illinois",https://upload.wikimedia.org/wikipedia/commons/thumb/3/34/Harrison_Ford_by_Gage_Skidmore_3.jpg/440px-Harrison_Ford_by_Gage_Skidmore_3.jpg,fcirettg
+4,2026-10-31 17:11:00,Johnny Depp,John Christopher Depp II,1963-06-09,"Owensboro, Kentucky",https://thumb.wikimedia.org/wikipedia/commons/thumb/5/5f/Johnny_Depp_Alice_Through_the_Looking_Glass_premiere.jpg/250px-Johnny_Depp_Alice_Through_the_Looking_Glass_premiere.jpg?utm_source=en.wikipedia.org&utm_campaign=parser&utm_content=thumbnail,
+5,2026-11-01 17:11:00,Aaron Paul,Aaron Paul Sturtevant,1979-08-27,"Emmett, Idaho",https://images.mubicdn.net/images/cast_member/47647/cache-3429-1478101707/image-w856.jpg,ale
+6,2026-11-02 17:11:00,Ryan Gosling,Ryan Thomas Gosling,1980-11-12,"London, Canada",https://www.google.com/url?sa=t&source=web&rct=j&url=https%3A%2F%2Fes.wikipedia.org%2Fwiki%2FRyan_Gosling&ved=0CBcQjRxqFwoTCMjvwpivzJcDFQAAAAAdAAAAABA3&opi=89978449,senna
+7,2026-11-03 17:11:00,matthew lilard,Matthew Lyn Lillard,1970-01-24,"Lansing, Michigan",https://www.google.com/url?sa=t&source=web&rct=j&url=https%3A%2F%2Fes.wikipedia.org%2Fwiki%2FMatthew_Lillard&ved=0CBcQjRxqFwoTCMDk_8avzJcDFQAAAAAdAAAAABBS&opi=89978449,senna
+8,2026-11-04 17:11:00,Elijah Wood,Elijah Jordan Wood,1981-01-28,"Cedar Rapids, Iowa",https://www.imdb.com/es/name/nm0000704/mediaviewer/rm2331620608/?ref_=nm_ov_ph,puppet
+9,2026-11-05 17:11:00,Mia Masikowska,Mia Wasikowska,1989-10-25,"Canberra, Australia",https://thumb.wikimedia.org/wikipedia/commons/thumb/e/e6/Mia_Wasikowska_by_Gage_Skidmore.jpg/250px-Mia_Wasikowska_by_Gage_Skidmore.jpg?utm_source=en.wikipedia.org&utm_campaign=parser&utm_content=thumbnail,puppet
+10,2026-11-06 17:11:00,Damian Chapa,Damian Robert Chapa,1963-10-29,"Dayton, Ohio",https://es.wikipedia.org/wiki/Damian_Chapa,puppet
+11,2026-11-07 17:11:00,Raymond Cruz,Raymond Cruz,1964-09-10,"Los Angeles, California",https://www.imdb.com/es-es/name/nm0190441/bio/,puppet
+12,2026-11-08 17:11:00,Danny Trejo,Dan Trejo,1944-05-16,"Los Angeles, California",https://www.imdb.com/es/name/nm0001803/,puppet
+13,2026-11-09 17:11:00,Andrew,Miles Teller,1987-02-20,"Downingtown,Pennsylvania",https://www.imdb.com/es-es/name/nm1886602/?ref_=sr_t_1,naruto
+14,2026-11-10 17:11:00,Christoph Waltz,Christoph Waltz,1956-10-04,"Vienna, Austria",https://www.imdb.com/name/nm0910607/mediaviewer/rm252355072/?ref_=nm_ov_ph,naruto
+15,2026-11-11 17:11:00,Owen Wilson,Owen Cunningham Wilson,1968-11-18,"Dallas, Texas",https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcScZDjs48uaWsVNku5b8a7O_HGGwBTt2tSg-eBwlbeJcdOqf3YU3iR0dl9iAI-0BJlX-ZGXgKPl9yf7qV_6thVhp1AX9c3sgM3bo1faWgI&s=10,naruto
+16,2026-11-12 17:11:00,Timothee Chalamet,Timothee Hal Chalamet,1995-12-27,New York,https://m.media-amazon.com/images/M/MV5BNDUzNjRhMjEtOTNiNS00NDk0LTk1ZDgtN2MzM2MwZmJlOGEzXkEyXkFqcGc@.jpg,goku
+17,2026-11-13 17:11:00,Jim Cummings,James Jonah Cummings,1952-11-03,"Youngstown, Ohio",https://www.imdb.com/es/name/nm0191906/mediaviewer/rm561284610/?ref_=nm_ov_ph,puppet
+18,2026-11-14 17:11:00,Marilyn Burns,Mary Lynn Ann Burns,1948-05-07,"Erie, Pennsylvania",https://www.imdb.com/es/name/nm0122782/mediaviewer/rm3838033154/?ref_=nm_ov_ph,mariana:p
+19,2026-11-15 17:11:00,Ping Xiao Po,Thomas Jacob Black,1969-10-28,"Santa Mónica, California",https://www.imdb.com/es/name/nm0085312/mediaviewer/rm2590282497/?ref_=nm_ov_ph,miguelito
+20,2026-11-16 17:11:00,Mufasa,Jonathan Roberts,1994-07-07,United States of America,https://www.bing.com/images/search?q=lion+king+author&id=1DB525C37B1C428B78F1D3E70DBCE12A06168BC4,Everybody
+21,2026-11-17 17:11:00,James Ortiz,James Ortiz ,1984-02-16,"Albany, New York",https://en.wikipedia.org/wiki/File:James_Ortiz_at_Comic_Con_Connections_26_17.jpg,senna
+22,2026-11-18 17:11:00,Jamie Foxx,Eric Marlon Bishop,1967-12-13,"Terrell, Texas",https://www.imdb.com/name/nm0004937/mediaviewer/rm2382231808/?ref_=nm_ov_ph,joni
+23,2026-11-19 17:11:00,Sean Cummins,Sean S. Cunningham,09-05-1980,United States of America,https://tse2.mm.bing.net/th/id/OIP.Jbz3Q3wh37Z1rJaMnbSgqQAAAA?r=0&rs=1&pid=ImgDetMain&o=7&rm=3,Raphinha
+24,2026-11-20 17:11:00,Rowan Atkinson,Rowan Sebastian Atkinson,1955-01-26,"Consett, UK",https://www.google.com/url?sa=t&source=web&rct=j&url=https%3A%2F%2Fes.wikipedia.org%2Fwiki%2FRowan_Atkinson&ved=0CBcQjRxqFwoTCNjZv6azzJcDFQAAAAAdAAAAABA3&opi=89978449,senna
+25,2026-11-21 17:11:00,Craig Ferguson,Craig Ferguson,1962-04-17,"Glasglow, Escocia",https://www.imdb.com/es/name/nm0272401/mediaviewer/rm1034988032/?ref_=nm_ov_ph,senna
+26,2026-11-22 17:11:00,Zendaya ,Zendaya Maree Stoermer,1998-8-1,"Oakland, California",https://media.vogue.mx/photos/6aa896b03c672e48e3851779/2:3/w_2560%2Cc_limit/2294835910.jpg,senna
+27,2026-11-23 17:11:00,Driss,Omar Sy,1978-01-20,"Yyvelines,Francia",https://www.imdb.com/es-es/name/nm1082477/?ref_=tt_cst_t_2,naruto
+28,2026-11-24 17:11:00,Rebeca Ferguson,Rebecca Louisa Ferguson Sundström,1983-10-19,Suecia,https://m.media-amazon.com/images/M/MV5BMDVlZjIzOTktYzNmZC00MjIzLTk1YTMtMzdlOTFiNzQ3ZGY0XkEyXkFqcGc@.jpg,fcirettg
+29,2026-11-25 17:11:00,Chistopher Lee,Sir Christopher Frank Carandini Lee,1922-04-07,"Londres, Inglaterra",https://www.imdb.com/es/name/nm0000489/mediaviewer/rm868391680/?ref_=nm_ov_ph,fcirettg
