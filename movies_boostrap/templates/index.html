@@ -1,22 +1,14 @@
 {% extends "base.html" %}
 {% block body %}
-    <h1>7th Art Database</h1>
-    <div>
-        <ul>
-            <li><a href="{{ url_for('movies') }}">Movies</a></li>
+    <main class="container py-5 text-center">
+        <img
+            src="{{ url_for('static', filename='images/Logo7adb.png') }}"
+            alt="7th Art Database"
+            class="img-fluid mb-4"
+        >
+        <ul class="list-unstyled">
+            <li class="mb-2"><a href="{{ url_for('movies') }}">Movies</a></li>
             <li><a href="{{ url_for('stars') }}">Stars</a></li>
         </ul>
-    </div>
-    <ul>
-        {% for movie in rows %}
-            <li>
-                {% if movie.poster_url %}
-                <a href="{{ url_for('movie_detail', movie_id=movie.id) }}">
-                    <img src="{{ movie.poster_url }}" alt="{{ movie.movie_title }} poster" width="100"> 
-                </a>
-                {% endif %}
-                <span>{{ movie.movie_title }} ({{ movie.release_date }})</span>
-            </li>
-        {% endfor %}    
-    </ul>
+    </main>
 {% endblock %}

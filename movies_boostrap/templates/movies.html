@@ -1,19 +1,122 @@
 {% extends "base.html" %}
 {% block body %}
-    <h1>7th Art Database</h1>
-    <h2>Movies</h2>
-    <p>Welcome to the Movie Database!</p>
-    <div><a href="{{ url_for('index') }}">Back to Home</a></div>
-    <ul>
-        {% for movie in rows %}
-            <li>
-                {% if movie.poster_url %}
-                <a href="{{ url_for('movie_detail', movie_id=movie.id) }}">
-                    <img src="{{ movie.poster_url }}" alt="{{ movie.movie_title }} poster" width="100">
-                </a>
-                {% endif %}
-                <span>{{ movie.movie_title }} ({{ movie.release_date }})</span>
-            </li>
-        {% endfor %}    
-    </ul>
+    <main class="container py-4">
+        <h1>Movies</h1>
+        <p>Welcome to the Movie Database!</p>
+        <p><a href="{{ url_for('index') }}">Back to Home</a></p>
+
+        <div class="mb-3">
+            <label for="movieTitleSearch" class="form-label">Search by movie title</label>
+            <input
+                type="search"
+                class="form-control"
+                id="movieTitleSearch"
+                placeholder="Enter a movie title"
+                autocomplete="off"
+            >
+        </div>
+
+        <div class="table-responsive">
+            <table class="table table-dark table-striped table-hover align-middle">
+                <thead>
+                    <tr>
+                        <th scope="col">Poster</th>
+                        <th scope="col" aria-sort="none" data-sort-key="title">
+                            Movie title
+                            <button type="button" class="btn btn-sm btn-link p-0 ms-1 sort-btn" data-sort-key="title" data-direction="asc" aria-label="Sort by movie title ascending">▲</button>
+                            <button type="button" class="btn btn-sm btn-link p-0 sort-btn" data-sort-key="title" data-direction="desc" aria-label="Sort by movie title descending">▼</button>
+                        </th>
+                        <th scope="col" aria-sort="none" data-sort-key="date">
+                            Release date
+                            <button type="button" class="btn btn-sm btn-link p-0 ms-1 sort-btn" data-sort-key="date" data-direction="asc" aria-label="Sort by release date ascending">▲</button>
+                            <button type="button" class="btn btn-sm btn-link p-0 sort-btn" data-sort-key="date" data-direction="desc" aria-label="Sort by release date descending">▼</button>
+                        </th>
+                    </tr>
+                </thead>
+                <tbody id="moviesTableBody">
+                    {% for movie in rows %}
+                        <tr data-movie-title="{{ movie.movie_title }}" data-release-date="{{ movie.release_date }}">
+                            <td>
+                                {% if movie.poster_url %}
+                                    <a href="{{ url_for('movie_detail', movie_id=movie.id) }}">
+                                        <img src="{{ movie.poster_url }}" alt="{{ movie.movie_title }} poster" width="80">
+                                    </a>
+                                {% endif %}
+                            </td>
+                            <td>
+                                <a href="{{ url_for('movie_detail', movie_id=movie.id) }}">{{ movie.movie_title }}</a>
+                            </td>
+                            <td>{{ movie.release_date }}</td>
+                        </tr>
+                    {% else %}
+                        <tr>
+                            <td colspan="3" class="text-center">No movies available.</td>
+                        </tr>
+                    {% endfor %}
+                    <tr id="noMoviesMatch" class="d-none">
+                        <td colspan="3" class="text-center">No movies match your search.</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <p id="movieSearchResults" class="text-body-secondary" aria-live="polite"></p>
+    </main>
+
+    <script>
+        const movieTitleSearch = document.getElementById("movieTitleSearch");
+        const movieRows = document.querySelectorAll("#moviesTableBody tr[data-movie-title]");
+        const noMoviesMatch = document.getElementById("noMoviesMatch");
+        const movieSearchResults = document.getElementById("movieSearchResults");
+
+        function filterMovies() {
+            const query = movieTitleSearch.value.trim().toLocaleLowerCase();
+            let visibleCount = 0;
+
+            movieRows.forEach((row) => {
+                const title = row.dataset.movieTitle.toLocaleLowerCase();
+                const matches = title.includes(query);
+                row.classList.toggle("d-none", !matches);
+                if (matches) visibleCount += 1;
+            });
+
+            noMoviesMatch.classList.toggle("d-none", visibleCount > 0 || movieRows.length === 0);
+            movieSearchResults.textContent = query
+                ? `${visibleCount} movie${visibleCount === 1 ? "" : "s"} found`
+                : "";
+        }
+
+        movieTitleSearch.addEventListener("input", filterMovies);
+
+        const moviesTableBody = document.getElementById("moviesTableBody");
+        const sortButtons = document.querySelectorAll(".sort-btn");
+
+        function sortMovies(key, direction) {
+            const factor = direction === "asc" ? 1 : -1;
+            const rows = Array.from(movieRows);
+
+            rows.sort((a, b) => {
+                if (key === "title") {
+                    return factor * a.dataset.movieTitle.localeCompare(b.dataset.movieTitle, undefined, { sensitivity: "base" });
+                }
+                return factor * a.dataset.releaseDate.localeCompare(b.dataset.releaseDate);
+            });
+
+            // Insert before the "no match" row so it stays last
+            rows.forEach((row) => moviesTableBody.insertBefore(row, noMoviesMatch));
+
+            sortButtons.forEach((btn) => {
+                const active = btn.dataset.sortKey === key && btn.dataset.direction === direction;
+                btn.classList.toggle("fw-bold", active);
+                btn.classList.toggle("opacity-50", !active);
+            });
+            document.querySelectorAll("th[data-sort-key]").forEach((th) => {
+                th.setAttribute("aria-sort", th.dataset.sortKey === key ? (direction === "asc" ? "ascending" : "descending") : "none");
+            });
+        }
+
+        sortButtons.forEach((btn) => {
+            btn.classList.add("opacity-50");
+            btn.addEventListener("click", () => sortMovies(btn.dataset.sortKey, btn.dataset.direction));
+        });
+    </script>
 {% endblock %}

@@ -1,43 +1,47 @@
 {% extends "base.html" %}
 {% block body %}
-        <h1>Movie Detail</h1>
-        <p>Welcome to the Movie Detail page!</p>
-        <table>
-            <tr>
-                <th>Poster</th>
-                <th>Details</th>
-            </tr>
-            
-            <tr>
-                {% for movie in rows %}
-                <td>
-                    
-                    {% if movie.poster_url %}
-                        <img src="{{ movie.poster_url }}" alt="{{ movie.movie_title }} poster" width="250">
-                    {% else %}
-                        No poster available
-                    {% endif %}
-                    
-                </td>
-                <td>
-                    <h2>{{ movie.movie_title }}</h2>
-                    <h3> ({{ movie.release_date }})</h3>
-                    <p><strong>Release Date:</strong> {{ movie.release_date }}</p>
-                    <p><strong>Stars:</strong></p>
-                    <ul>
-                        {% for star in stars %}
-                            
-                                <li>
-                                    {{ star.role }} - <a href="{{ url_for('star_detail', star_id=star.id) }}">
-                                        {{ star.stage_name }}
-                                    </a>
-                                </li>
-                            
-                        {% endfor %}
-                    </ul>
-                </td>
-                {% endfor %}
-            </tr>
-        </table>
-        <div><a href="{{ url_for('movies') }}">Back to Movies</a></div>
+    <main class="container py-4">
+        <h1 class="mb-4">Movie Detail</h1>
+        {% for movie in rows %}
+            <article class="card mb-4">
+                <div class="row g-0">
+                    <div class="col-md-4">
+                        {% if movie.poster_url %}
+                            <img
+                                src="{{ movie.poster_url }}"
+                                class="img-fluid rounded-start h-100 w-100 object-fit-cover"
+                                alt="{{ movie.movie_title }} poster"
+                            >
+                        {% else %}
+                            <div class="h-100 d-flex align-items-center justify-content-center p-4 text-body-secondary">
+                                No poster available
+                            </div>
+                        {% endif %}
+                    </div>
+                    <div class="col-md-8">
+                        <div class="card-body">
+                            <h2 class="card-title">{{ movie.movie_title }}</h2>
+                            <p class="card-text">
+                                <strong>Release Date:</strong> {{ movie.release_date }}
+                            </p>
+                            <h3 class="h5">Stars</h3>
+                            <ul class="mb-0">
+                                {% for star in stars %}
+                                    <li>
+                                        {{ star.role }} -
+                                        <a href="{{ url_for('star_detail', star_id=star.id) }}">{{ star.stage_name }}</a>
+                                    </li>
+                                {% else %}
+                                    <li>No stars listed.</li>
+                                {% endfor %}
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </article>
+        {% else %}
+            <p>Movie not found.</p>
+        {% endfor %}
+        <a href="{{ url_for('movies') }}">Back to Movies</a>
+    </main>
 {% endblock %}
