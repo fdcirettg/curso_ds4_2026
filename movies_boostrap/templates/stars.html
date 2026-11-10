@@ -1,18 +1,121 @@
 {% extends "base.html" %}
 {% block body %}
-    <h1>7th Art Database</h1>
-    <h2>Stars</h2>
-    <p>Welcome to the Movie Database!</p>}
-    <ul>
-        {% for star in rows %}
-            <li>
-                {% if star.image_url %}
-                <a href="{{ url_for('star_detail', star_id=star.id) }}">
-                    <img src="{{ star.image_url }}" alt="{{ star.stage_name }} image" width="100">
-                </a>
-                {% endif %}
-                <span>{{ star.stage_name }} ({{ star.real_name }})</span>
-            </li>
-        {% endfor %}    
-    </ul>
+    <main class="container py-4">
+        <h1>Stars</h1>
+        <p>Welcome to the Movie Database!</p>
+        <p><a href="{{ url_for('index') }}">Back to Home</a></p>
+
+        <div class="mb-3">
+            <label for="starSearch" class="form-label">Search by star name</label>
+            <input
+                type="search"
+                class="form-control"
+                id="starSearch"
+                placeholder="Enter a star name"
+                autocomplete="off"
+            >
+        </div>
+       <div class="table-responsive">
+            <table class="table table-dark table-striped table-hover align-middle">
+                <thead>
+                    <tr>
+                        <th scope="col">Image</th>
+                        <th scope="col" aria-sort="none" data-sort-key="title">
+                            Stage name
+                            <button type="button" class="btn btn-sm btn-link p-0 ms-1 sort-btn" data-sort-key="title" data-direction="asc" aria-label="Sort by stage name ascending">▲</button>
+                            <button type="button" class="btn btn-sm btn-link p-0 sort-btn" data-sort-key="title" data-direction="desc" aria-label="Sort by stage name descending">▼</button>
+                        </th>
+                        <th scope="col" aria-sort="none" data-sort-key="date">
+                            Birth date
+                            <button type="button" class="btn btn-sm btn-link p-0 ms-1 sort-btn" data-sort-key="date" data-direction="asc" aria-label="Sort by birth date ascending">▲</button>
+                            <button type="button" class="btn btn-sm btn-link p-0 sort-btn" data-sort-key="date" data-direction="desc" aria-label="Sort by birth date descending">▼</button>
+                        </th>
+                    </tr>
+                </thead>
+                <tbody id="starsTableBody">
+                    {% for star in rows %}
+                        <tr data-star-title="{{ star.stage_name }}" data-release-date="{{ star.date_of_birth }}">
+                            <td>
+                                {% if star.image_url %}
+                                    <a href="{{ url_for('star_detail', star_id=star.id) }}">
+                                        <img src="{{ star.image_url }}" alt="{{ star.stage_name }} poster" width="80">
+                                    </a>
+                                {% endif %}
+                            </td>
+                            <td>
+                                <a href="{{ url_for('star_detail', star_id=star.id) }}">{{ star.stage_name }}</a>
+                            </td>
+                            <td>{{ star.date_of_birth }}</td>
+                        </tr>
+                    {% else %}
+                        <tr>
+                            <td colspan="3" class="text-center">No stars available.</td>
+                        </tr>
+                    {% endfor %}
+                    <tr id="nostarsMatch" class="d-none">
+                        <td colspan="3" class="text-center">No stars match your search.</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <p id="starSearchResults" class="text-body-secondary" aria-live="polite"></p>
+    </main>
+
+    <script>
+        const starSearch = document.getElementById("starSearch");
+        const starRows = document.querySelectorAll("#starsTableBody tr[data-star-title]");
+        const nostarsMatch = document.getElementById("nostarsMatch");
+        const starSearchResults = document.getElementById("starSearchResults");
+
+        function filterstars() {
+            const query = starSearch.value.trim().toLocaleLowerCase();
+            let visibleCount = 0;
+
+            starRows.forEach((row) => {
+                const title = row.dataset.starTitle.toLocaleLowerCase();
+                const matches = title.includes(query);
+                row.classList.toggle("d-none", !matches);
+                if (matches) visibleCount += 1;
+            });
+
+            nostarsMatch.classList.toggle("d-none", visibleCount > 0 || starRows.length === 0);
+            starSearchResults.textContent = query
+                ? `${visibleCount} star${visibleCount === 1 ? "" : "s"} found`
+                : "";
+        }
+
+        starSearch.addEventListener("input", filterstars);
+
+        const starsTableBody = document.getElementById("starsTableBody");
+        const sortButtons = document.querySelectorAll(".sort-btn");
+
+        function sortstars(key, direction) {
+            const factor = direction === "asc" ? 1 : -1;
+            const rows = Array.from(starRows);
+
+            rows.sort((a, b) => {
+                if (key === "title") {
+                    return factor * a.dataset.starTitle.localeCompare(b.dataset.starTitle, undefined, { sensitivity: "base" });
+                }
+                return factor * a.dataset.releaseDate.localeCompare(b.dataset.releaseDate);
+            });
+
+            // Insert before the "no match" row so it stays last
+            rows.forEach((row) => starsTableBody.insertBefore(row, nostarsMatch));
+
+            sortButtons.forEach((btn) => {
+                const active = btn.dataset.sortKey === key && btn.dataset.direction === direction;
+                btn.classList.toggle("fw-bold", active);
+                btn.classList.toggle("opacity-50", !active);
+            });
+            document.querySelectorAll("th[data-sort-key]").forEach((th) => {
+                th.setAttribute("aria-sort", th.dataset.sortKey === key ? (direction === "asc" ? "ascending" : "descending") : "none");
+            });
+        }
+
+        sortButtons.forEach((btn) => {
+            btn.classList.add("opacity-50");
+            btn.addEventListener("click", () => sortstars(btn.dataset.sortKey, btn.dataset.direction));
+        });
+    </script>
 {% endblock %}
