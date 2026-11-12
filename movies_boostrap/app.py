@@ -1,5 +1,6 @@
 """ A simple movie database application """
 
+import datetime
 import os
 
 from flask import Flask, flash, redirect, render_template
@@ -94,5 +95,25 @@ def logout():
     flash('You have been logged out successfully.', 'info')
     return redirect(url_for('index'))
 
+@app.route('/add_star', methods=['GET', 'POST'])
+def add_star():
+    """ Route to add a new star """
+    if request.method == 'POST':
+        name = request.form['name']
+        real_name = request.form['real_name']
+        place_of_birth = request.form['place_of_birth']
+        image_url = request.form['image_url']
+        birthdate = request.form['birthdate']
+        db_path = 'movies.db'
+        conn = db.open_database(db_path)
+        d = { 'created_at': datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S"), 'stage_name': name,
+             'real_name': real_name, 
+             'place_of_birth': place_of_birth, 'image_url': image_url, 
+             'username': session.get('username'), 'date_of_birth': birthdate}
+        print(f"Adding star with data: {d}")  # Debugging line
+        db.insert_data(conn,'stars', d)
+        db.close_database(conn)
+        return redirect(url_for('stars'))
+    return render_template('add_star.html')
 if __name__ == '__main__':
     app.run(debug=True)

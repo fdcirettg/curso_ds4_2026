@@ -41,6 +41,16 @@ def create_insert_statement(table_name: str, data: dict) -> str:
 
 def insert_data(conn, table_name: str, data: dict):
     """ Insert data into the specified table """
+    try:
+        sql = create_insert_statement(table_name, data)
+        cur = conn.cursor()
+        cur.execute(sql, tuple(data.values()))
+        conn.commit()
+    except sqlite3.Error as e:
+        print(f"Error inserting data into {table_name}: {e}")
+    except Exception as e:
+        print(f"Unexpected error: {e}")
+
     sql = create_insert_statement(table_name, data)
     cur = conn.cursor()
     cur.execute(sql, tuple(data.values()))
@@ -77,10 +87,17 @@ def show_rows(rows: list):
 
 def user_login(conn, username: str, password: str) -> bool:
     """ Check if the provided username and password match a user in the database """
-    cur = conn.cursor()
-    cur.execute("SELECT * FROM users WHERE username = ? AND password = ?", (username, password))
-    user = cur.fetchone()
-    return user is not None
+    try:
+        cur = conn.cursor()
+        cur.execute("SELECT * FROM users WHERE username = ? AND password = ?", (username, password))
+        user = cur.fetchone()
+        return user is not None
+    except sqlite3.Error as e:
+        print(f"Error during user login: {e}")
+        return False
+    except Exception as e:
+        print(f"Unexpected error: {e}")
+        return False
 
 def close_database(conn):
     """ Close the database connection """
