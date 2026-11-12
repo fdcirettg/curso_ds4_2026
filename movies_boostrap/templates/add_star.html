@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+{% block body %}
+    <main class="container py-5 text-center">
+        <h1 class="mb-4">Add a Star</h1>
+        <form method="POST" action="{{ url_for('add_star') }}">
+            <div class="mb-3">
+                <label for="name" class="form-label">Name</label>
+                <input type="text" class="form-control" id="name" name="name" required>
+            </div>
+            <div class="mb-3">
+                <label for="birthdate" class="form-label">Birthdate</label>
+                <input type="date" class="form-control" id="birthdate" name="birthdate" required>
+            </div>
+            <button type="submit" class="btn btn-primary">Add Star</button>
+        </form>
+    </main>
+{% endblock %}
