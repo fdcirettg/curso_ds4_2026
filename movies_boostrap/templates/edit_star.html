@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+{% block body %}
+    <main class="container py-5">
+        <h1 class="mb-4">Edit Star</h1>
+        <form method="POST" action="{{ url_for('edit_star', star_id=star.id) }}">
+            <div class="mb-3">
+                <label for="stage_name" class="form-label">Stage name</label>
+                <input type="text" class="form-control" id="stage_name" name="stage_name" value="{{ star.stage_name }}" required>
+            </div>
+            <div class="mb-3">
+                <label for="real_name" class="form-label">Real name</label>
+                <input type="text" class="form-control" id="real_name" name="real_name" value="{{ star.real_name or '' }}">
+            </div>
+            <div class="mb-3">
+                <label for="date_of_birth" class="form-label">Birth date</label>
+                <input type="date" class="form-control" id="date_of_birth" name="date_of_birth" value="{{ star.date_of_birth or '' }}">
+            </div>
+            <div class="mb-3">
+                <label for="place_of_birth" class="form-label">Place of birth</label>
+                <input type="text" class="form-control" id="place_of_birth" name="place_of_birth" value="{{ star.place_of_birth or '' }}">
+            </div>
+            <div class="mb-3">
+                <label for="image_url" class="form-label">Image URL</label>
+                <input type="url" class="form-control" id="image_url" name="image_url" value="{{ star.image_url or '' }}">
+            </div>
+            <button type="submit" class="btn btn-primary">Save changes</button>
+            <a class="btn btn-secondary" href="{{ url_for('stars') }}">Cancel</a>
+        </form>
+    </main>
+{% endblock %}

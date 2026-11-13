@@ -30,6 +30,9 @@
                             <button type="button" class="btn btn-sm btn-link p-0 ms-1 sort-btn" data-sort-key="date" data-direction="asc" aria-label="Sort by birth date ascending">▲</button>
                             <button type="button" class="btn btn-sm btn-link p-0 sort-btn" data-sort-key="date" data-direction="desc" aria-label="Sort by birth date descending">▼</button>
                         </th>
+                        {% if session.get('logged_in') %}
+                            <th scope="col">Edit</th>
+                        {% endif %}
                     </tr>
                 </thead>
                 <tbody id="starsTableBody">
@@ -46,14 +49,24 @@
                                 <a href="{{ url_for('star_detail', star_id=star.id) }}">{{ star.stage_name }}</a>
                             </td>
                             <td>{{ star.date_of_birth }}</td>
+                            {% if session.get('logged_in') %}
+                                <td>
+                                    <a class="btn btn-sm btn-outline-primary"
+                                       href="{{ url_for('edit_star', star_id=star.id) }}"
+                                       aria-label="Edit {{ star.stage_name }}"
+                                       title="Edit {{ star.stage_name }}">
+                                        <span aria-hidden="true">&#9998;</span>
+                                    </a>
+                                </td>
+                            {% endif %}
                         </tr>
                     {% else %}
                         <tr>
-                            <td colspan="3" class="text-center">No stars available.</td>
+                            <td colspan="{{ 4 if session.get('logged_in') else 3 }}" class="text-center">No stars available.</td>
                         </tr>
                     {% endfor %}
                     <tr id="nostarsMatch" class="d-none">
-                        <td colspan="3" class="text-center">No stars match your search.</td>
+                        <td colspan="{{ 4 if session.get('logged_in') else 3 }}" class="text-center">No stars match your search.</td>
                     </tr>
                 </tbody>
             </table>

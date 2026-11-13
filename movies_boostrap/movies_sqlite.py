@@ -4,6 +4,7 @@ import sqlite3
 import os
 import csv
 import pandas as pd
+from typing import Optional
 
 def load_csv_data(file_path)->dict:
     """ Load data from a CSV file and return it as a dictionary of dictionaries """
@@ -51,11 +52,6 @@ def insert_data(conn, table_name: str, data: dict):
     except Exception as e:
         print(f"Unexpected error: {e}")
 
-    sql = create_insert_statement(table_name, data)
-    cur = conn.cursor()
-    cur.execute(sql, tuple(data.values()))
-    conn.commit()
-
 def load_csv_to_database(conn, table_name: str, csv_file_path: str):
     """ Load data from a CSV file and insert it into the specified table in the database """
     data = load_csv_data(csv_file_path)
@@ -79,6 +75,41 @@ def retrieve_data_with_query(conn, query: str) -> list:
     fields = [description[0] for description in cur.description]
     rows = [dict(zip(fields, row)) for row in cur.fetchall()]
     return rows
+
+def get_star(conn, star_id: int) -> Optional[dict]:
+    """Retrieve a star by ID for editing."""
+    cur = conn.cursor()
+    cur.execute(
+        """SELECT id, stage_name, real_name, date_of_birth, place_of_birth, image_url
+           FROM stars WHERE id = ?""",
+        (star_id,),
+    )
+    row = cur.fetchone()
+    if row is None:
+        return None
+
+    fields = [description[0] for description in cur.description]
+    return dict(zip(fields, row))
+
+def update_star(conn, star_id: int, data: dict) -> bool:
+    """Update editable star details and report whether a star was found."""
+    cur = conn.cursor()
+    cur.execute(
+        """UPDATE stars
+           SET stage_name = ?, real_name = ?, date_of_birth = ?,
+               place_of_birth = ?, image_url = ?
+           WHERE id = ?""",
+        (
+            data['stage_name'],
+            data.get('real_name', ''),
+            data.get('date_of_birth', ''),
+            data.get('place_of_birth', ''),
+            data.get('image_url', ''),
+            star_id,
+        ),
+    )
+    conn.commit()
+    return cur.rowcount > 0
 
 def show_rows(rows: list):
     """ Print the rows retrieved from the database as a table """
