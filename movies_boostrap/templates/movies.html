@@ -31,6 +31,9 @@
                             <button type="button" class="btn btn-sm btn-link p-0 ms-1 sort-btn" data-sort-key="date" data-direction="asc" aria-label="Sort by release date ascending">▲</button>
                             <button type="button" class="btn btn-sm btn-link p-0 sort-btn" data-sort-key="date" data-direction="desc" aria-label="Sort by release date descending">▼</button>
                         </th>
+                        {% if session.get('logged_in') %}
+                            <th scope="col">Edit</th>
+                        {% endif %}
                     </tr>
                 </thead>
                 <tbody id="moviesTableBody">
@@ -47,6 +50,13 @@
                                 <a href="{{ url_for('movie_detail', movie_id=movie.id) }}">{{ movie.movie_title }}</a>
                             </td>
                             <td>{{ movie.release_date }}</td>
+                            {% if session.get('logged_in') %}
+                                <td>
+                                    <a href="{{ url_for('edit_movie', movie_id=movie.id) }}" class="btn btn-sm btn-outline-primary" aria-label="Edit {{ movie.movie_title }}" title="Edit {{ movie.movie_title }}">
+                                        <span aria-hidden="true">&#9998;</span>
+                                    </a>
+                                </td>
+                            {% endif %}
                         </tr>
                     {% else %}
                         <tr>
@@ -59,6 +69,7 @@
                 </tbody>
             </table>
         </div>
+
         <p id="movieSearchResults" class="text-body-secondary" aria-live="polite"></p>
     </main>
 

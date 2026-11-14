@@ -1,4 +1,4 @@
-""" Database operations for the movies app with SQLite 
+""" Database operations for the movies app with SQLite
 """
 import sqlite3
 import os
@@ -40,6 +40,28 @@ def create_insert_statement(table_name: str, data: dict) -> str:
     sql = f"INSERT INTO {table_name} ({columns}) VALUES ({placeholders})"
     return sql
 
+def update_movie(conn, movie_id: int, data: dict) -> bool:
+    """Update editable movie details and report whether a movie was found
+    created_at,movie_title,release_date,poster_url,username.
+    """
+    cur = conn.cursor()
+    cur.execute(
+        # created_at,movie_title,release_date,poster_url,username
+        """UPDATE movies
+           SET movie_title = ?, release_date = ?, poster_url = ?,
+               username = ?
+           WHERE id = ?""",
+        (
+            data['movie_title'],
+            data.get('release_date', ''),
+            data.get('poster_url', ''),
+            data.get('username', ''),
+            movie_id,
+        ),
+    )
+    conn.commit()
+    return cur.rowcount > 0
+
 def insert_data(conn, table_name: str, data: dict):
     """ Insert data into the specified table """
     try:
@@ -67,7 +89,7 @@ def retrieve_data(conn, table_name: str) -> list:
     return rows
 
 def retrieve_data_with_query(conn, query: str) -> list:
-    """ Retrieve data from the database using a custom SQL query 
+    """ Retrieve data from the database using a custom SQL query
     Returns a list of dictionaries, where each dictionary represents a row in the result set.
     """
     cur = conn.cursor()
@@ -83,6 +105,21 @@ def get_star(conn, star_id: int) -> Optional[dict]:
         """SELECT id, stage_name, real_name, date_of_birth, place_of_birth, image_url
            FROM stars WHERE id = ?""",
         (star_id,),
+    )
+    row = cur.fetchone()
+    if row is None:
+        return None
+
+    fields = [description[0] for description in cur.description]
+    return dict(zip(fields, row))
+
+def get_movie(conn, movie_id: int) -> Optional[dict]:
+    """Retrieve a movie by ID for editing."""
+    cur = conn.cursor()
+    cur.execute(
+        """SELECT id, movie_title, release_date, poster_url
+           FROM movies WHERE id = ?""",
+        (movie_id,),
     )
     row = cur.fetchone()
     if row is None:
@@ -110,6 +147,8 @@ def update_star(conn, star_id: int, data: dict) -> bool:
     )
     conn.commit()
     return cur.rowcount > 0
+
+
 
 def show_rows(rows: list):
     """ Print the rows retrieved from the database as a table """

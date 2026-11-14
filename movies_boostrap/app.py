@@ -74,6 +74,32 @@ def star_detail(star_id):
     #print(related_movies)  # Debugging line
     return render_template('star_detail.html', rows=rows, movies=related_movies)
 
+@app.route('/edit_movie/<int:movie_id>', methods=['GET', 'POST'])
+def edit_movie(movie_id):
+    """Edit a movie's details; only authenticated users may make changes."""
+    if not session.get('logged_in'):
+        flash('Please log in to edit a movie.', 'warning')
+        return redirect(url_for('login'))
+
+    if request.method == 'POST':
+        conn = db.open_database('movies.db')
+        try:
+            updated = db.update_movie(conn, movie_id, request.form)
+        finally:
+            db.close_database(conn)
+        if not updated:
+            return 'Movie not found', 404
+        return redirect(url_for('movies'))
+    conn = db.open_database('movies.db')
+    try:
+        movie = db.get_movie(conn, movie_id)
+    finally:
+        db.close_database(conn)
+    if movie is None:
+        return 'Movie not found', 404
+
+    return render_template('edit_movie.html', movie=movie)
+
 @app.route('/edit_star/<int:star_id>', methods=['GET', 'POST'])
 def edit_star(star_id):
     """Edit a star's details; only authenticated users may make changes."""
